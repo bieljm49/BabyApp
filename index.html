@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f4a7b9"><title>Baby App | Registro rápido</title>
+  <link rel="manifest" href="manifest.json"><link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="topbar"><div><small>Diário do bebê</small><h1 id="babyName">Alice Medeiros</h1></div><button class="icon-btn" id="syncBtn" aria-label="Sincronizar">↻</button></header>
+<main class="page">
+  <section class="hero"><p>O que aconteceu agora?</p><strong id="clock"></strong></section>
+  <section class="quick-grid" aria-label="Ações rápidas">
+    <button class="action-card" data-action="fralda" data-type="xixi"><span>💧</span><b>Xixi</b></button>
+    <button class="action-card" data-action="fralda" data-type="coco"><span>💩</span><b>Cocô</b></button>
+    <button class="action-card" data-action="fralda" data-type="ambos"><span>🧷</span><b>Xixi + cocô</b></button>
+    <button class="action-card" data-action="mamadeira"><span>🍼</span><b>Mamadeira</b></button>
+    <button class="action-card" data-action="peito"><span>🤱</span><b>Amamentação</b></button>
+    <button class="action-card" data-action="sono"><span>😴</span><b>Sono</b></button>
+  </section>
+  <section class="today"><h2>Hoje</h2><div id="todayCards" class="summary-grid"></div><h2>Últimos registros</h2><div id="recentList" class="timeline"></div></section>
+</main>
+<nav class="bottom-nav"><a class="active" href="index.html">＋<small>Registrar</small></a><a href="evolucao.html">▥<small>Evolução</small></a><a href="historico.html">☷<small>Histórico</small></a><a href="configuracoes.html">⚙<small>Ajustes</small></a></nav>
+<div id="modal" class="modal hidden" role="dialog" aria-modal="true"><div class="sheet"><button id="closeModal" class="close">×</button><div id="modalContent"></div></div></div>
+<div id="toast" class="toast hidden"></div>
+<script src="js/api.js"></script><script src="js/app.js"></script>
+</body></html>

@@ -1,0 +1,9 @@
+{
+  "name": "Diário do Meu Bebê",
+  "short_name": "Meu Bebê",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fff0f5",
+  "theme_color": "#f4a7b9",
+  "icons": []
+}
