@@ -1,0 +1,9 @@
+const SHEET_NAME = 'Registros';
+const HEADERS = ['id','createdAt','caregiver','category','type','amount','duration','startAt','endAt','eventAt'];
+function doGet(e){try{if((e.parameter.action||'list')!=='list')return json({error:'Ação inválida'});return json(listRecords())}catch(err){return json({error:String(err)})}}
+function doPost(e){try{const body=JSON.parse(e.postData.contents||'{}');if(body.action==='save')return json(saveRecord(body.record));if(body.action==='delete')return json(deleteRecord(body.id));return json({error:'Ação inválida'})}catch(err){return json({error:String(err)})}}
+function sheet(){const ss=SpreadsheetApp.getActiveSpreadsheet();let sh=ss.getSheetByName(SHEET_NAME);if(!sh)sh=ss.insertSheet(SHEET_NAME);if(sh.getLastRow()===0)sh.appendRow(HEADERS);return sh}
+function saveRecord(r){if(!r||!r.id)throw new Error('Registro inválido');const sh=sheet(),values=sh.getDataRange().getValues();for(let i=1;i<values.length;i++)if(String(values[i][0])===String(r.id))return {ok:true,duplicate:true};sh.appendRow(HEADERS.map(h=>r[h]??''));return {ok:true}}
+function listRecords(){const values=sheet().getDataRange().getValues();if(values.length<2)return [];const headers=values[0];return values.slice(1).filter(r=>r[0]).map(row=>Object.fromEntries(headers.map((h,i)=>[h,row[i]])))}
+function deleteRecord(id){const sh=sheet(),values=sh.getDataRange().getValues();for(let i=values.length-1;i>=1;i--)if(String(values[i][0])===String(id))sh.deleteRow(i+1);return {ok:true}}
+function json(data){return ContentService.createTextOutput(JSON.stringify(data)).setMimeType(ContentService.MimeType.JSON)}
